@@ -24,3 +24,5 @@ button,.pill,.side-section,.selected-card,.readings>div,.service{border-radius:2
 @media(max-width:740px){.guide{bottom:66px;left:8px;width:min(390px,calc(100% - 16px));grid-template-columns:48px 1fr;padding:8px}.guide-avatar{width:46px;height:50px}.guide-avatar span{font-size:26px}.guide-copy b{font-size:12px}.guide-copy p{font-size:10px}}
 .guide{width:min(490px,calc(100% - 32px));grid-template-columns:132px 1fr}.guide-avatar{width:128px;height:auto;display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:3px}.guide-avatar img{width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:auto;border:1px solid #7c7663}.guide-avatar a{text-decoration:none;color:#536b61;text-align:center;font-size:8px;line-height:1.25}.guide-avatar span{display:none}
 @media(max-width:740px){.guide{width:min(430px,calc(100% - 16px));grid-template-columns:94px 1fr}.guide-avatar{width:90px;padding:2px}.guide-avatar a{font-size:7px}.guide-copy p{font-size:10px}}
+.guide{position:fixed;left:83px;bottom:14px}
+@media(max-width:740px){.guide{left:8px;bottom:66px}}
