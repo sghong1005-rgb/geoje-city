@@ -2,33 +2,34 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102d38">
-<title>거제 시티 — 섬 도시 건설</title><meta name="description" content="거제의 해안과 산을 3D로 살펴보고 도시를 키우는 실시간 시티 빌더.">
+<title>거제 시티 — 섬 도시 건설</title><meta name="description" content="픽셀 아트로 만든 거제 섬에서 구역과 시설을 배치하고 도시를 운영하세요.">
 <link rel="stylesheet" href="style.css">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"}}</script>
 </head>
 <body>
-<header><div class="brand"><span class="brand-icon">🌊</span><div><b>거제 시티</b><small>GEOJE ISLAND · CITY SIM</small></div></div><div class="head-right"><span id="calendar">🌱 봄 · 1년차 1월</span><span class="location">장승포 · 거제도</span><button id="sound" class="icon-btn" title="효과음 켜기">♫</button></div></header>
+<header><div class="brand"><span class="brand-icon">🌊</span><div><b>거제 시티</b><small>GEOJE ISLAND · PIXEL CITY</small></div></div><div class="head-right"><span id="calendar">🌱 봄 · 1년차 1월</span><span class="location">장승포 · 거제도</span><button id="sound" class="icon-btn" title="효과음 켜기">♫</button></div></header>
 <section class="stats">
  <div class="metric"><label>💰 도시 자금</label><b id="money">₩5,000</b></div>
  <div class="metric"><label>👥 인구</label><b id="population">180명</b><small id="popDelta">+0</small></div>
  <div class="metric"><label>🏢 일자리</label><b id="jobs">90개</b></div>
  <div class="metric"><label>🙂 행복도</label><b id="happiness">68%</b><div class="happiness"><i id="happyBar"></i></div></div>
- <div class="demand"><span>구역 수요</span><div><label>주거</label><i><em id="demandRes"></em></i></div><div><label>상업</label><i><em id="demandCom"></em></i></div><div><label>산업</label><i><em id="demandInd"></em></i></div></div>
+ <div class="demand"><span>구역 수요</span><div><label>주거</label><i><em id="demandRes"></em></i></div><div><label>상업</label><i><em id="demandCom"></em></i></div><div><label>공업</label><i><em id="demandInd"></em></i></div></div>
  <div class="clock"><span class="live-dot"></span><b id="clock">자동 진행 · 1×</b><div class="clock-controls"><button id="pause">Ⅱ</button><button data-speed="1" class="speed selected">1×</button><button data-speed="2" class="speed">2×</button><button data-speed="3" class="speed">3×</button></div></div>
 </section>
 <main class="layout">
  <nav class="toolbar" id="toolbar"></nav>
  <section class="viewport" id="viewport">
-  <div id="scene" aria-label="3D 거제 도시 지도"></div>
+  <div id="scene" aria-label="픽셀 아트 3D 거제 도시 지도"></div>
   <div class="map-top"><span class="pill">🗺 <b>거제도 · 장승포</b></span><span class="pill" id="weather">☀ 맑음 · 21°C</span><span class="pill">🔌 <b id="powerStatus">전력 공급</b></span></div>
   <div class="map-bottom"><div class="camera-help">드래그 회전 · 휠 확대 · 우클릭 이동</div><div class="zoom-controls"><button id="zoomOut">−</button><button id="zoomIn">+</button><button id="resetCamera">⌖</button></div></div>
   <div id="eventToast" class="event-toast"></div>
-  <div class="loading" id="loading"><span>🌊</span><b>거제의 섬을 불러오는 중…</b><small>3D 도시 지도를 준비하고 있어요.</small></div>
+  <div class="loading" id="loading"><span>🌊</span><b>거제의 섬을 불러오는 중…</b><small>픽셀 도시 지도를 준비하고 있어요.</small></div>
+  <section class="guide" id="guide" aria-live="polite"><div class="guide-avatar"><span>👩🏻‍💼</span></div><div class="guide-copy"><small>리센느 · 거제시 도시 안내</small><b id="guideTitle">시장님, 거제에 오신 걸 환영해요!</b><p id="guideText">제가 도시를 만드는 순서와 꼭 필요한 시설부터 알려 드릴게요.</p><div class="guide-actions"><button id="guideNext">안내 계속하기 →</button><button id="guideSkip">안내 닫기</button></div></div></section>
  </section>
  <aside class="sidebar">
   <div class="side-title"><b>도시 관리</b><small id="coord">36 × 34 섬 지도</small></div>
   <section class="selected-card" id="selectedInfo"><h3>🧭 거제에 오신 걸 환영해요</h3><p>도로를 놓고 구역을 나누면<br>도시가 스스로 성장합니다.</p></section>
-  <section class="side-section"><h3>📈 도시 흐름 <small>실시간</small></h3><div class="readings"><div><label>월 세수</label><b id="taxIncome">+0원</b></div><div><label>월 유지비</label><b id="upkeep">−0원</b></div><div><label>교통</label><b id="traffic">원활</b></div><div><label>환경</label><b id="environment">82%</b></div></div></section>
+  <section class="side-section"><h3>📈 도시 흐름 <small>실시간</small></h3><div class="readings"><div><label>월 세수</label><b id="taxIncome">+0원</b></div><div><label>월 유지비</label><b id="upkeep">−0원</b></div><div><label>교통</label><b id="traffic">원활</b></div><div><label>환경</label><b id="environment">82%</b></div><div><label>물품 공급</label><b id="goodsStatus">원활</b></div><div><label>집값 지수</label><b id="valueIndex">100</b></div></div></section>
   <section class="side-section"><h3>⚙ 기반 시설</h3><div class="services" id="services"></div></section>
   <section class="side-section tax-section"><h3>🧾 세금 정책 <small>6–16%</small></h3>
    <div class="tax-row"><span>주거</span><input id="taxRes" type="range" min="6" max="16" value="10"><b id="taxResValue">10%</b></div>
